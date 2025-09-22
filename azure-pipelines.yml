@@ -1,0 +1,20 @@
+trigger:
+  branches:
+    include:
+      - main  # Trigger pipeline on push to the main branch
+
+pool:
+  vmImage: 'ubuntu-latest'  # You can also use windows-latest or macos-latest
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'  # Use the latest Python version 3.x
+      addToPath: true
+
+  - checkout: self  # Checkout the code from GitHub
+
+  - script: |
+      python --version
+      python hello.py
+    displayName: 'Run Python Script'
